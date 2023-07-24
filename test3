@@ -1,0 +1,28 @@
+import threading
+
+def worker(num):
+    print('Worker: %s' % num)
+
+threads = []
+for i in range(5):
+    t = threading.Thread(target=worker, args=(i,))
+    threads.append(t)
+    t.start()
+
+
+
+
+from multiprocessing import Process
+
+def worker(num):
+    print('Worker:', num)
+
+if __name__ == '__main__':
+    processes = []
+    for i in range(5):
+        p = Process(target=worker, args=(i,))
+        processes.append(p)
+        p.start()
+
+    for p in processes:
+        p.join()
